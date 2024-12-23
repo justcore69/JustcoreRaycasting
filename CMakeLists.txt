@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.5.0)
+set(CMAKE_CXX_STANDARD 11)
 project(raycasting VERSION 0.1.0 LANGUAGES C CXX)
 
 include_directories(src)
@@ -11,6 +12,12 @@ file(GLOB SOURCES
     "*.hpp"
     "src/*.cpp"
     "src/*.hpp"
+    "src/math/*.cpp"
+    "src/math/*.hpp"
+    "src/entities/*.cpp"
+    "src/entities/*.hpp"
+    "src/rendering/*.cpp"
+    "src/rendering/*.hpp"
 )
 
 add_executable(raycasting ${SOURCES})
