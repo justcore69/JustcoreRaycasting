@@ -64,13 +64,17 @@ void WorldRenderer::DrawWallsGreedy(){
     // TODO: implement DrawWalls (not greedy) that will cast rays for every wall corner instead of every vertical line
     // It will significantly enhance perfomance, leaving us space for the CPU texturing!
 
-    int c = 32;
+    int c = 64; // Vertical lines count. Even 32 has occasional fps drops
 
     for(int i = 0; i < c; i++){
         float s = Game::player->fov / c;
         Raycast ray = CastRay(Game::player->position.x, Game::player->position.y, Game::player->rotation + s * i - Game::player->fov / 2, Color::white);
         MinimapRenderer::DrawFunctionDelayed(std::bind(MinimapRenderer::DrawRay, ray, Color::white));
+
         float d = std::max(Vec2::dist(ray.startPosition, ray.firstHit), 1.0f);
+
+        // TODO: fix fisheye
+
         if(d > 0){
             DrawVerticalLine(WINDOW_W / c * i, 1 / d, Color(255 / d, 255 / d, 255 / d, 255));
         }
